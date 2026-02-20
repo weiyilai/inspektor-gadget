@@ -171,7 +171,7 @@ func detachAndDeleteInternetGateways(svc *ec2.EC2, vpcId string) error {
 		for _, attachment := range gateway.Attachments {
 			if aws.StringValue(attachment.VpcId) != vpcId {
 				// not attached to this vpc
-				return nil
+				continue
 			}
 			fmt.Printf("detaching internet gateway: %s\n", aws.StringValue(gateway.InternetGatewayId))
 			input := &ec2.DetachInternetGatewayInput{
